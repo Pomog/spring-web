@@ -33,5 +33,5 @@ jobs:
       run: chmod +x ./gradlew    
         
     - name: Build with Gradle
-      run: ./spring-web/gradlew build --no-daemon
+      run: ./gradlew build --no-daemon
 
