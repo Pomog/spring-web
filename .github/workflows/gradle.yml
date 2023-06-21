@@ -26,9 +26,4 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build --no-daemon
-
-      - name: Archive build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-artifact
-          path: build/libs/
+        working-directory: /home/runner/work/spring-web/
