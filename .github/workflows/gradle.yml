@@ -12,7 +12,7 @@ jobs:
           java-version: '20'
           distribution: 'temurin'
 
-      - name: Make gradlew executable
+      - name: Make gradlew exeassscutable
         run: chmod +x ./gradlew
       - name: Build with Gradle
         run: ./gradlew build --no-daemon
