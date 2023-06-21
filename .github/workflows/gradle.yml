@@ -36,4 +36,4 @@ jobs:
         
     - name: Build with Gradle
       run: ./gradlew build --no-daemon
-      working-directory: spring-web
+      working-directory: /home/runner/work/spring-web/spring-web
