@@ -1,0 +1,9 @@
+SPRING PROJECT
+https://start.spring.io/
+Spring Boot DevTools
+Lombok
+Spring Web
+Thymeleaf
+Spring Data JPA
+H2 Database - Database connectivity
+Validation
