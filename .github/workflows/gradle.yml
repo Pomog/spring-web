@@ -15,4 +15,7 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew build --no-daemon
+      
+        working-directory: /home/runner/work/spring-web/blob/a46a1223c5e9a373011b8c32aea8f4ec9d4a2f24/gradle/wrapper/gradle-wrapper.properties
+      
