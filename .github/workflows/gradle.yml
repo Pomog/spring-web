@@ -33,5 +33,5 @@ jobs:
       run: chmod +x ./gradlew
 
     - name: Build with Gradle
-      working-directory: /home/runner/work/spring-web
+      working-directory: ./spring-web
       run: ./gradlew build
