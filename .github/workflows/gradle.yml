@@ -30,7 +30,7 @@ jobs:
         distribution: 'temurin'
         
     - name: Grant execute permission to gradlew
-      run: chmod +x /home/runner/work/spring-web/spring-web/gradlew
+      run: chmod +x ./gradlew
     
         
     - name: Build with Gradle
