@@ -9,6 +9,8 @@ jobs:
     steps:
     - name: Checkout project sources
       uses: actions/checkout@v2
+    - name: Grant execute permission to gradlew
+      run: chmod +x ./PeopleDB/gradlew
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
     - name: Run build with Gradle Wrapper
