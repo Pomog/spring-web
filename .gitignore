@@ -7,7 +7,7 @@ build/
 
 #java specific
 *.class
-#*.jar
+
 
 ### STS ###
 .apt_generated
