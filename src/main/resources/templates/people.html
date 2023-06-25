@@ -8,8 +8,9 @@
 </head>
 <body>
 
-<div class="col-8 mx-auto">
-    <table class="table">
+<div class="col-8 mx-auto my-5">
+    <h2>People List</h2>
+    <table class="table table-sm">
         <thead>
         <tr>
             <th scope="col">ID</th>
@@ -20,19 +21,24 @@
             <th scope="col">Email</th>
         </tr>
         </thead>
+
         <tbody>
-        <tr th:each="person : ${people}">
-            <th scope="row" th:text="${person.id}">1</th>
-            <td th:text="${person.lastName}">Mark</td>
-            <td th:text="${person.firstName}">Otto</td>
-            <td th:text="${{person.dob}}">@mdo</td>
-            <td th:text="${{person.salary}}">@mdo</td>
-            <td th:text="${person.email}">@mdo</td>
+        <tr th:if="${#lists.isEmpty(people)}">
+            <td colspan="6" class="text-center"> No data </td>
         </tr>
+            <tr th:each="person : ${people}">
+                <th scope="row" th:text="${person.id}">1</th>
+                <td th:text="${person.lastName}">Mark</td>
+                <td th:text="${person.firstName}">Otto</td>
+                <td th:text="${{person.dob}}">@mdo</td>
+                <td th:text="${{person.salary}}">@mdo</td>
+                <td th:text="${person.email}">@mdo</td>
+            </tr>
         </tbody>
     </table>
-</div>
 
+    <h2>Person Form</h2>
+</div>
 <div class="col-2 mx-auto">
 <form th:object ="${person}" method="post">
     <div class="mb-3">
