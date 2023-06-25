@@ -21,4 +21,5 @@ public class Person {
     private String lastName;
     private LocalDate dob;
     private BigDecimal salary;
+    private String email;
 }
