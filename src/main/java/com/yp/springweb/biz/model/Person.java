@@ -15,15 +15,18 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 public class Person {
+
     @Id
     @GeneratedValue
     private Long id;
 
     @NotEmpty(message = "First name can not be empty")
     private String firstName;
+
     @NotEmpty(message = "Last name can not be empty")
     private String lastName;
-    @PastOrPresent(message = "Date od birth must be in the past")
+
+    @PastOrPresent(message = "Date of birth must be in the past")
     @NotNull(message = "Date od birth must be specified")
     private LocalDate dob;
 
