@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,12 +33,13 @@
                 <th scope="row" th:text="${person.id}">1</th>
                 <td th:text="${person.lastName}">Mark</td>
                 <td th:text="${person.firstName}">Otto</td>
-                <td th:text="${{person.dob}}">@mdo</td>
+                <td th:text="${#temporals.format(person.dob, 'MMMM dd, yyyy', T(java.util.Locale).ENGLISH)}">@mdo</td>
                 <td th:text="${{person.salary}}">@mdo</td>
                 <td th:text="${person.email}" class="d-sm-none d-md-table-cell">@mdo</td>
             </tr>
             </tbody>
         </table>
+        <button type="submit" name="edit" value="true" class="btn btn-secondary mb-5 me-2">Edit</button>
         <button type="submit" name="delete" value="true" class="btn btn-danger mb-5">Delete</button>
     </form>
 
@@ -83,6 +84,7 @@
     </div>
     </div>
     <button type="submit" class="Save Person">Submit</button>
+    <input type="hidden" th:field="*{id}">
 </form>
 </div>
 
