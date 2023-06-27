@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +21,7 @@
                 <th scope="col" th:text="#{table.dob}">DOB</th>
                 <th scope="col" th:text="#{table.salary}">Salary</th>
                 <th scope="col" class="d-sm-none d-md-table-cell" th:text="#{table.email}">Email</th>
+                <th scope="col" th:text="#{table.photo}">Photo</th>
             </tr>
             </thead>
 
@@ -36,6 +37,7 @@
                 <td th:text="${#temporals.format(person.dob, 'MMMM dd, yyyy', T(java.util.Locale).ENGLISH)}">@mdo</td>
                 <td th:text="${{person.salary}}">@mdo</td>
                 <td th:text="${person.email}" class="d-sm-none d-md-table-cell">@mdo</td>
+                <td th:text="${person.photoFileName}">@mdo</td>
             </tr>
             </tbody>
         </table>
@@ -43,10 +45,12 @@
         <button type="submit" name="delete" value="true" class="btn btn-danger mb-5">Delete</button>
     </form>
 
-    <h2>Person Form</h2>
+
 </div>
+
 <div class="col-2 mx-auto">
-<form th:object ="${person}" method="post" novalidate>
+    <h2>Person Form</h2>
+<form th:object ="${person}" method="post" novalidate enctype="multipart/form-data">
     <div class="mb-3">
         <label for="firstName" class="form-label">First name</label>
         <input type="text" class="form-control" id="firstName" th:field="*{firstName}" th:errorclass="is-invalid" aria-describedby="firstNameHelp">
@@ -83,7 +87,12 @@
         Please choose a username.
     </div>
     </div>
-    <button type="submit" class="Save Person">Submit</button>
+    <div class="mb-3">
+        <label for="photoFilename" class="form-label">PhotoFile</label>
+        <input class="form-control" type="file" id="photoFilename" th:field="*{photoFileName}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
     <input type="hidden" th:field="*{id}">
 </form>
 </div>

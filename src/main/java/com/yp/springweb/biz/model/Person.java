@@ -37,4 +37,6 @@ public class Person {
     @Email(message = "Email must be valid")
     @NotEmpty(message = "Email can not be empty")
     private String email;
+
+    private String photoFileName;
 }
