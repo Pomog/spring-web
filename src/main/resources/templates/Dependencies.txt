@@ -7,3 +7,4 @@ Thymeleaf
 Spring Data JPA
 H2 Database - Database connectivity
 Validation
+https://github.com/thymeleaf/thymeleaf-extras-java8time/tree/3.0-master
