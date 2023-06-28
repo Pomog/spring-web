@@ -3,6 +3,7 @@ package com.yp.springweb.data;
 import com.yp.springweb.biz.model.Person;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
