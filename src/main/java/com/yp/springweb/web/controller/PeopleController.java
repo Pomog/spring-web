@@ -48,12 +48,13 @@ public class PeopleController {
     }
     @GetMapping("/images/{resource}")
     public ResponseEntity<Resource> getResource(@PathVariable() String resource){
-        System.out.println("!!!!!!!!!!!getResource INVOKED!!!!!!!!!!!!!");
-        log.info("resource : " + resource);
-        return ResponseEntity
+        ResponseEntity<Resource> responseEntity = ResponseEntity
                 .ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, format(DISPOSITION, resource))
                 .body(fileStorageRepository.findByName(resource));
+        log.info("resource : " + resource);
+        log.info("responseEntity : " + responseEntity);
+        return responseEntity;
     }
     @PostMapping
     public String savePerson(@Valid Person person, Errors errors, @RequestParam("photoFileName") MultipartFile photoFile) throws IOException {
