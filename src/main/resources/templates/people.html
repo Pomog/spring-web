@@ -37,7 +37,7 @@
                 <td th:text="${#temporals.format(person.dob, 'MMMM dd, yyyy', T(java.util.Locale).ENGLISH)}">@mdo</td>
                 <td th:text="${{person.salary}}">@mdo</td>
                 <td th:text="${person.email}" class="d-sm-none d-md-table-cell">@mdo</td>
-                <td th:text="${person.photoFileName}">@mdo</td>
+                <td> <img th:src="@{/people/images/{filename}(filename=${person.photoFileName})}" height="32px" width="32px"> </td>
             </tr>
             </tbody>
         </table>
