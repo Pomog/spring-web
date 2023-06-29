@@ -1,6 +1,7 @@
 package com.yp.springweb.web.controller;
 
 import com.yp.springweb.biz.model.Person;
+import com.yp.springweb.biz.service.PersonService;
 import com.yp.springweb.data.FileStorageRepository;
 import com.yp.springweb.data.PersonRepository;
 import com.yp.springweb.exceptions.StorageException;
@@ -30,11 +31,14 @@ public class PeopleController {
             """;
     private PersonRepository personRepository;
     private FileStorageRepository fileStorageRepository;
+    private PersonService personService;
 
-    public PeopleController(PersonRepository personRepository, FileStorageRepository fileStorageRepository) {
+    public PeopleController(PersonRepository personRepository, FileStorageRepository fileStorageRepository, PersonService personService) {
         this.personRepository = personRepository;
         this.fileStorageRepository = fileStorageRepository;
+        this.personService = personService;
     }
+
     @ModelAttribute ("people")
     public Iterable<Person> getPeople(){
         return personRepository.findAll();
@@ -64,8 +68,7 @@ public class PeopleController {
         log.info("Errors : " + errors);
         if (!errors.hasErrors()) {
             try {
-                fileStorageRepository.save(photoFile.getOriginalFilename(), photoFile.getInputStream());
-                personRepository.save(person);
+                personService.save(person, photoFile.getInputStream());
                 return "redirect:people";
             } catch (StorageException e) {
                 model.addAttribute("errorMsg", "system is currently unable to accept files");
