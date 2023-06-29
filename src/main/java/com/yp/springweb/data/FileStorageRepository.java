@@ -1,5 +1,6 @@
 package com.yp.springweb.data;
 
+import com.yp.springweb.exceptions.StorageException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -22,7 +23,7 @@ public class FileStorageRepository {
             Path filePath = getFilePath(originalFilename);
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new StorageException(e);
         }
     }
 
@@ -31,9 +32,8 @@ public class FileStorageRepository {
             Path filePath = getFilePath(filename);
             return new UrlResource(filePath.toUri());
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            throw new StorageException(e);
         }
-        return null;
     }
 
     private Path getFilePath(String filename) {

@@ -35,9 +35,9 @@
                 <td th:text="${person.lastName}">Mark</td>
                 <td th:text="${person.firstName}">Otto</td>
                 <td th:text="${#temporals.format(person.dob, 'MMMM dd, yyyy', T(java.util.Locale).ENGLISH)}">@mdo</td>
-                <td th:text="${{person.salary}}">@mdo</td>
+                <td th:text="${{person.salary}}" class="text-end">@mdo</td>
                 <td th:text="${person.email}" class="d-sm-none d-md-table-cell">@mdo</td>
-                <td> <img th:src="@{/people/images/{filename}(filename=${person.photoFileName})}" height="32px" width="32px"> </td>
+                <td> <img th:if="${person.photoFileName}" th:src="@{/people/images/{filename}(filename=${person.photoFileName})}" height="32px" width="32px"> </td>
             </tr>
             </tbody>
         </table>
@@ -48,53 +48,57 @@
 
 </div>
 
-<div class="col-2 mx-auto">
-    <h2>Person Form</h2>
-<form th:object ="${person}" method="post" novalidate enctype="multipart/form-data">
-    <div class="mb-3">
-        <label for="firstName" class="form-label">First name</label>
-        <input type="text" class="form-control" id="firstName" th:field="*{firstName}" th:errorclass="is-invalid" aria-describedby="firstNameHelp">
-        <div id="validationFirstName" class="invalid-feedback" th:errors="*{firstName}">
-            Please choose a username.
-        </div>
-    </div>
-    <div class="mb-3">
-        <label for="lastName" class="form-label">Last name</label>
-        <input type="text" class="form-control" id="lastName" th:field="*{lastName}" th:errorclass="is-invalid" aria-describedby="lastNameHelp">
-        <div id="validationLastName" class="invalid-feedback" th:errors="*{lastName}">
-            Please choose a username.
-        </div>
-    </div>
-    <div class="mb-3">
-        <label for="dob" class="form-label">DOB</label>
-        <input type="date" class="form-control" id="dob" th:field="*{dob}" th:errorclass="is-invalid" aria-describedby="dobHelp">
-        <div id="validationDOB" class="invalid-feedback" th:errors="*{dob}">
-            Please choose a username.
-        </div>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="email" th:field="*{email}" th:errorclass="is-invalid" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        <div id="validationEmail" class="invalid-feedback" th:errors="*{email}">
-            Please choose a username.
-        </div>
-    </div>
-    <div class="mb-3">
-        <label for="salary" class="form-label">Salary</label>
-        <input type="number" class="form-control" id="salary" th:field="*{salary}" th:errorclass="is-invalid" aria-describedby="salaryHelp">
-    <div id="validationSalary" class="invalid-feedback" th:errors="*{salary}">
-        Please choose a username.
-    </div>
-    </div>
-    <div class="mb-3">
-        <label for="photoFilename" class="form-label">PhotoFile</label>
-        <input class="form-control" type="file" id="photoFilename" th:field="*{photoFileName}">
+    <div class="alert alert-warning" role="alert" th:text="${errorMsg}" th:if="${errorMsg}">
+        A simple warning alert—check it out!
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <input type="hidden" th:field="*{id}">
-</form>
+    <div class="col-2 mx-auto">
+        <h2>Person Form</h2>
+    <form th:object ="${person}" method="post" novalidate enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First name</label>
+            <input type="text" class="form-control" id="firstName" th:field="*{firstName}" th:errorclass="is-invalid" aria-describedby="firstNameHelp">
+            <div id="validationFirstName" class="invalid-feedback" th:errors="*{firstName}">
+                Please choose a username.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last name</label>
+            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" th:errorclass="is-invalid" aria-describedby="lastNameHelp">
+            <div id="validationLastName" class="invalid-feedback" th:errors="*{lastName}">
+                Please choose a username.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="dob" class="form-label">DOB</label>
+            <input type="date" class="form-control" id="dob" th:field="*{dob}" th:errorclass="is-invalid" aria-describedby="dobHelp">
+            <div id="validationDOB" class="invalid-feedback" th:errors="*{dob}">
+                Please choose a username.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" th:errorclass="is-invalid" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            <div id="validationEmail" class="invalid-feedback" th:errors="*{email}">
+                Please choose a username.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="salary" class="form-label">Salary</label>
+            <input type="number" class="form-control" id="salary" th:field="*{salary}" th:errorclass="is-invalid" aria-describedby="salaryHelp">
+        <div id="validationSalary" class="invalid-feedback" th:errors="*{salary}">
+            Please choose a username.
+        </div>
+        </div>
+        <div class="mb-3">
+            <label for="photoFilename" class="form-label">PhotoFile</label>
+            <input class="form-control" type="file" id="photoFilename" th:field="*{photoFileName}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <input type="hidden" th:field="*{id}">
+    </form>
 </div>
 
 </body>

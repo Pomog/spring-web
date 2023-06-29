@@ -3,6 +3,7 @@ package com.yp.springweb.web.controller;
 import com.yp.springweb.biz.model.Person;
 import com.yp.springweb.data.FileStorageRepository;
 import com.yp.springweb.data.PersonRepository;
+import com.yp.springweb.exceptions.StorageException;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.Resource;
@@ -57,14 +58,19 @@ public class PeopleController {
         return responseEntity;
     }
     @PostMapping
-    public String savePerson(@Valid Person person, Errors errors, @RequestParam("photoFileName") MultipartFile photoFile) throws IOException {
+    public String savePerson(Model model, @Valid Person person, Errors errors, @RequestParam("photoFileName") MultipartFile photoFile) throws IOException {
         log.info("File name : " + photoFile.getOriginalFilename());
         log.info("File size : " + photoFile.getSize());
         log.info("Errors : " + errors);
         if (!errors.hasErrors()) {
-            fileStorageRepository.save(photoFile.getOriginalFilename(), photoFile.getInputStream());
-            personRepository.save(person);
-            return "redirect:people";
+            try {
+                fileStorageRepository.save(photoFile.getOriginalFilename(), photoFile.getInputStream());
+                personRepository.save(person);
+                return "redirect:people";
+            } catch (StorageException e) {
+                model.addAttribute("errorMsg", "system is currently unable to accept files");
+                return "people";
+            }
         }
         return "people";
     }
