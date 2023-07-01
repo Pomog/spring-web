@@ -1,5 +1,6 @@
 package com.yp.springweb.web.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.yp.springweb.biz.model.Person;
 import com.yp.springweb.biz.service.PersonService;
 import com.yp.springweb.data.FileStorageRepository;
@@ -80,7 +81,10 @@ public class PeopleController {
 
     @PostMapping(params = "delete=true")
     public String deletePeople(@RequestParam Optional<List<Long>> selections){
-        selections.ifPresent(longs -> personRepository.deleteAllById(longs));
+        log.info("deletePeople : " + selections);
+        selections.ifPresent(longs -> {
+            personService.deleteAllById(longs);
+        });
         return "redirect:people";
     }
 

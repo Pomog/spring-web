@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Set;
 
 @Repository
 public class FileStorageRepository {
@@ -38,5 +39,16 @@ public class FileStorageRepository {
 
     private Path getFilePath(String filename) {
         return Path.of(storageFolder).resolve(filename).normalize();
+    }
+
+    public void deleteAllByName(Iterable<String> fileNames) {
+        try {
+            for (String fileName : fileNames) {
+                Path filePath = getFilePath(fileName);
+                Files.deleteIfExists(filePath);
+            }
+        } catch (IOException e) {
+            throw new StorageException(e);
+        }
     }
 }
