@@ -4,6 +4,8 @@ import com.yp.springweb.biz.model.Person;
 import com.yp.springweb.data.FileStorageRepository;
 import com.yp.springweb.data.PersonRepository;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +29,13 @@ public class PersonService {
         this.fileStorageRepository = fileStorageRepository;
     }
 
+    public Iterable<Person> findAll() {
+        return personRepository.findAll();
+    }
+    public Page<Person> findAll(Pageable pageable) {
+        return personRepository.findAll(pageable);
+    }
+
     @Transactional
     public Person save(Person person, InputStream inputStream) {
         fileStorageRepository.save(person.getPhotoFileName(), inputStream);
@@ -35,10 +44,6 @@ public class PersonService {
 
     public Optional<Person> findById(Long aLong) {
         return personRepository.findById(aLong);
-    }
-
-    public Iterable<Person> findAll() {
-        return personRepository.findAll();
     }
 
     public void deleteAllById(Iterable<Long> ids)  {
