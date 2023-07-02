@@ -65,4 +65,13 @@ public class PersonService {
             fileStorageRepository.deleteAllByName(fileNames);
         }
     }
+
+    public void deleteAllByIdCustomQuery(Iterable<Long> ids)  {
+        log.info("PersonService METHOD deleteAllByIdCustomQuery INVOKED");
+        Set<String> fileNames = personRepository.findFileNamesByIds(ids);
+        personRepository.deleteAllById(ids);
+        if (!fileNames.isEmpty()) {
+            fileStorageRepository.deleteAllByName(fileNames);
+        }
+    }
 }

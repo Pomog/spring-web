@@ -44,8 +44,10 @@ public class FileStorageRepository {
     public void deleteAllByName(Iterable<String> fileNames) {
         try {
             for (String fileName : fileNames) {
-                Path filePath = getFilePath(fileName);
-                Files.deleteIfExists(filePath);
+                if (fileName != null && !fileName.isBlank()) {
+                    Path filePath = getFilePath(fileName);
+                    Files.deleteIfExists(filePath);
+                }
             }
         } catch (IOException e) {
             throw new StorageException(e);

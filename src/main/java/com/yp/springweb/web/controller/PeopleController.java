@@ -83,7 +83,7 @@ public class PeopleController {
     public String deletePeople(@RequestParam Optional<List<Long>> selections){
         log.info("deletePeople : " + selections);
         selections.ifPresent(longs -> {
-            personService.deleteAllById(longs);
+            personService.deleteAllByIdCustomQuery(longs);
         });
         return "redirect:people";
     }
