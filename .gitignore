@@ -1,13 +1,14 @@
 HELP.md
 .gradle
+# Exclude the entire build/ directory
 build/
+
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-#java specific
-*.class
-
+# Exclude compiled Java class files
+# Remove the line *.class
 
 ### STS ###
 .apt_generated
@@ -17,7 +18,9 @@ build/
 .settings
 .springBeans
 .sts4-cache
+# Exclude the entire bin/ directory
 bin/
+
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
@@ -26,7 +29,9 @@ bin/
 *.iws
 *.iml
 *.ipr
+# Exclude the entire out/ directory
 out/
+
 !**/src/main/**/out/
 !**/src/test/**/out/
 
