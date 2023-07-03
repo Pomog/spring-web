@@ -82,7 +82,7 @@ public class PeopleController {
         return "people";
     }
 
-    @PostMapping(params = "delete=true")
+    @PostMapping(params = "action=delete")
     public String deletePeople(@RequestParam Optional<List<Long>> selections){
         log.info("deletePeople : " + selections);
         selections.ifPresent(longs -> {
@@ -91,7 +91,7 @@ public class PeopleController {
         return "redirect:people";
     }
 
-    @PostMapping(params = "edit=true")
+    @PostMapping(params = "action=edit")
     public String updatePeople(@RequestParam Optional<List<Long>> selections, Model model){
         log.info(selections);
         selections.ifPresent(longs -> {
@@ -99,5 +99,11 @@ public class PeopleController {
             model.addAttribute("person", personToUpdate);
         });
         return "people";
+    }
+    @PostMapping(params = "action=import")
+    public String importCSN(@RequestParam("csvFile") MultipartFile csvFile){
+        log.info("File name : " + csvFile.getOriginalFilename());
+        log.info("File size : " + csvFile.getSize());
+        return "redirect:people";
     }
 }

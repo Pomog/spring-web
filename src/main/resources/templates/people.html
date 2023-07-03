@@ -10,7 +10,7 @@
 
 <div class="col-8 mx-auto my-5">
     <h2 th:text="#{people.table.title}">People List</h2>
-    <form method="post" >
+    <form method="post" enctype="multipart/form-data">
         <table class="table table-sm">
             <thead>
             <tr>
@@ -52,8 +52,14 @@
             </ul>
         </nav>
 
-        <button type="submit" name="edit" value="true" class="btn btn-secondary mb-5 me-2">Edit</button>
-        <button type="submit" name="delete" value="true" class="btn btn-danger mb-5">Delete</button>
+        <div class="mb-3">
+            <label for="csvFile" class="form-label">CSV File</label>
+            <input class="form-control" type="file" id="csvFile" name="csvFile" >
+        </div>
+
+        <button type="submit" name="action" value="edit" class="btn btn-secondary mb-5 me-2">Edit</button>
+        <button type="submit" name="action" value="import" class="btn btn-success mb-5 me-2">Import CSV</button>
+        <button type="submit" name="action" value="delete" class="btn btn-danger mb-5">Delete</button>
     </form>
 
 </div>
