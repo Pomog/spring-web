@@ -44,7 +44,7 @@ public class PeopleController {
     }
 
     @ModelAttribute ("people")
-    public Page<Person> getPeople(@PageableDefault(size=3) Pageable page){
+    public Page<Person> getPeople(@PageableDefault(size=10) Pageable page){
         return personService.findAll(page);
     }
     @ModelAttribute
@@ -101,9 +101,14 @@ public class PeopleController {
         return "people";
     }
     @PostMapping(params = "action=import")
-    public String importCSN(@RequestParam("csvFile") MultipartFile csvFile){
+    public String importCSV(@RequestParam("csvFile") MultipartFile csvFile){
         log.info("File name : " + csvFile.getOriginalFilename());
         log.info("File size : " + csvFile.getSize());
+        try {
+            personService.importCSV(csvFile.getInputStream());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return "redirect:people";
     }
 }

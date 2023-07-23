@@ -9,13 +9,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+import java.util.zip.ZipInputStream;
 
 
 @Log4j2
@@ -77,6 +81,22 @@ public class PersonService {
         personRepository.deleteAllById(ids);
         if (!fileNames.isEmpty()) {
             fileStorageRepository.deleteAllByName(fileNames);
+        }
+    }
+
+    public void importCSV(InputStream csvFileStream) {
+        try {
+            ZipInputStream zipInputStream = new ZipInputStream(csvFileStream);
+            zipInputStream.getNextEntry();
+            InputStreamReader inputStreamReader = new InputStreamReader(zipInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            bufferedReader.lines()
+                    .skip(1)
+                    .limit(50)
+                    .map(Person::parse)
+                    .forEach(personRepository::save);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
